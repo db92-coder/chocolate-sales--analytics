@@ -1,0 +1,177 @@
+🍫 Chocolate Sales Analytics Pipeline
+
+An end-to-end analytics project that transforms raw sales data into marketing decision intelligence using PostgreSQL, Python modelling, and Power BI.
+
+This project demonstrates data modelling, feature engineering, opportunity scoring, and dashboard visualisation in a reproducible local environment.
+
+📌 Project Overview
+
+The goal of this project was to identify high-potential product–country combinations for targeted marketing campaigns.
+
+The pipeline:
+
+              Raw Sales Data
+                    ↓
+              SQL Cleaning & Structuring
+                    ↓
+              Analytics Mart Layer
+                    ↓
+              Python Feature Engineering & Scoring
+                    ↓
+              Opportunity Ranking
+                    ↓
+              Power BI Executive Dashboard
+
+
+The result is a monthly ranked Marketing Opportunity Index that highlights combinations with:
+
+              Strong sales volume
+              
+              Positive growth momentum
+              
+              Sustained multi-month trends
+              
+              Controlled volatility
+
+🛠 Tech Stack:
+
+              PostgreSQL 16 (Dockerised)
+              
+              Python (pandas, numpy, SQLAlchemy)
+              
+              Power BI
+              
+              Git
+              
+              VS Code
+
+🗂 Project Structure:
+              sql-lab/
+              │
+              ├── sql/
+              │   ├── schema/
+              │   ├── transforms/
+              │   └── marts/
+              │
+              ├── python/
+              │   ├── load/
+              │   └── analytics/
+              │
+              ├── data/
+              │
+              ├── .env.example
+              ├── requirements.txt
+              └── README.md
+
+🧠 Analytics Methodology
+1️⃣ Feature Engineering
+
+              From monthly aggregated product–country sales, the following features were engineered:
+              
+              Total sales amount
+              
+              Total boxes shipped
+              
+              Transaction count
+              
+              Log-based month-over-month growth
+              
+              Log-based 3-month growth
+              
+              Rolling 3-month volatility
+              
+              Log growth was used instead of percentage growth to stabilise extreme base-rate distortions.
+
+2️⃣ Opportunity Score
+
+              Each product–country combination is scored monthly using a weighted composite index:
+              
+              0.45 × Sales Volume
+              0.25 × Momentum (MoM Log Growth)
+              0.20 × 3-Month Log Growth
+              0.10 × Stability (Inverted Volatility)
+
+
+              Scores are normalised within each month to allow relative comparison.
+              
+              The highest score in each month receives:
+              
+                  opportunity_rank = 1
+                  Lower rank number = stronger marketing opportunity.
+
+3️⃣ Key Modelling Decisions
+
+              Log transformation applied to growth metrics to prevent extreme distortion.
+              
+              Minimum activity threshold applied to avoid ranking low-volume anomalies.
+              
+              Volatility penalty included to reduce influence of unstable spikes.
+              
+              Ranking performed per month to maintain contextual comparability.
+
+📊 Dashboard Outputs
+              Executive Sales Overview
+              
+              KPI Cards (Total Sales, Boxes, Transactions)
+              
+              Sales Trend Analysis
+              
+              Country-level performance
+              
+              Product Analytics
+              
+              Top-N dynamic filtering
+              
+              % Contribution of total sales
+              
+              MoM Growth tracking
+              
+              Opportunity scoring visualisation
+              
+              Marketing Opportunity Matrix
+              
+              Scatter plot (Growth vs Volume)
+              
+              Bubble size = Opportunity Score
+              
+              Monthly Top 10 ranked opportunities
+
+🚀 Running the Project
+              1️⃣ Start PostgreSQL via Docker
+              docker run ...
+              
+              2️⃣ Load raw data
+              python python/load/load_chocolate_sales.py
+              
+              3️⃣ Generate opportunity scores
+              python python/analytics/opportunity_scoring.py
+              
+              4️⃣ Refresh Power BI dashboard
+              📈 Business Insight
+
+              This pipeline enables:
+              
+              Prioritisation of marketing spend
+              
+              Identification of high-growth product-country combinations
+              
+              Detection of structural demand changes vs seasonal spikes
+              
+              Stable growth evaluation using log transformation
+
+📌 Future Improvements
+
+              Year-over-Year growth integration
+              
+              Seasonal decomposition (STL)
+              
+              Budget allocation optimisation
+              
+              Predictive forecasting layer
+              
+              Automated pipeline orchestration
+
+👤 Author
+
+Daniel Broadby
+Data Analytics & Business Intelligence
