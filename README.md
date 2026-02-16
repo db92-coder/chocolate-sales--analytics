@@ -30,37 +30,51 @@ It produces a monthly ranked table: **`marts.opportunity_scores`**, which highli
 
 ## 🧱 Architecture
 
-```text
-Raw CSV
-  ↓
-PostgreSQL (raw schema)
-  ↓
-Clean layer (clean schema)
-  ↓
-Analytics marts (marts schema)
-  ↓
-Python feature engineering + scoring
-  ↓
-marts.opportunity_scores
-  ↓
-Power BI dashboards (Executive + Product + Sales Team + Marketing Opportunities)
+The project follows a layered analytics structure:
 
-🛠 Tech stack
+### 1️⃣ Data Ingestion
+- Raw CSV sales data
+- Loaded into PostgreSQL (`raw` schema)
 
-PostgreSQL 16 (Docker)
+### 2️⃣ Data Cleaning
+- Standardised formats
+- Parsed dates
+- Normalised values
+- Stored in `clean` schema
 
-SQL (data cleaning + marts)
+### 3️⃣ Analytics Mart Layer
+- Monthly aggregation (product × country)
+- Business-ready feature columns
+- Stored in `marts` schema
 
-Python (pandas, numpy, SQLAlchemy, python-dotenv)
+### 4️⃣ Feature Engineering & Scoring (Python)
+- Log-based MoM growth
+- Log-based 3-month growth
+- Rolling volatility
+- Composite opportunity score
 
-Power BI (interactive dashboards)
+### 5️⃣ Business Intelligence
+- Power BI dashboards
+- Executive KPIs
+- Product analytics
+- Marketing opportunity matrix
 
-VS Code + SQLTools
+## 🛠 Tech stack
 
-Git / GitHub
+- PostgreSQL 16 (Docker)
+
+- SQL (data cleaning + marts)
+
+- Python (pandas, numpy, SQLAlchemy, python-dotenv)
+
+- Power BI (interactive dashboards)
+
+- VS Code + SQLTools
+
+- Git / GitHub
 
 
-📁 Project structure
+## 📁 Project structure
 sql-lab/
 ├─ sql/
 │  ├─ 10_schema/
